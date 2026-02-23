@@ -14,7 +14,7 @@ If you use this work, please cite:
   author={Balci, T., Yetkin, E. Fatih},
   journal={Biomedical Signal Processing and Control},
   year={to appeared}
-}```
+} ```
 
 ![CSP+LMNN pipeline](figs/graphical_abstract.png)
 
