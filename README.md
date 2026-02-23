@@ -21,7 +21,9 @@ If you use this work, please cite:
 
 The algorithmic framework of the code can be seen as follows: the main theme is the application of metric learning approach (LMNN) on CSP feature space in EEG. 
 
-![CSP+LMNN pipeline](figs/fig1.png)
+<p align="center">
+  <img src="figs/pipeline.png" width="600">
+</p>
 
 ## How to use?
 
