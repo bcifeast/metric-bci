@@ -6,3 +6,7 @@ Experiments on four MI-EEG datasets show consistent test-accuracy improvements f
 Overall, the CSP+LMNN pipeline provides a computationally efficient and interpretable solution, making it a practical candidate for real-world BCI applications.
 
 ![CSP+LMNN pipeline](figs/graphical_abstract.png)
+
+The algorithmic framework of the code can be seen as follows: the main theme is the application of metric learning approach (LMNN) on CSP feature space in EEG. 
+
+![CSP+LMNN pipeline](figs/fig1.png)
