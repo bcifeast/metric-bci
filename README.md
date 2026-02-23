@@ -10,3 +10,7 @@ Overall, the CSP+LMNN pipeline provides a computationally efficient and interpre
 The algorithmic framework of the code can be seen as follows: the main theme is the application of metric learning approach (LMNN) on CSP feature space in EEG. 
 
 ![CSP+LMNN pipeline](figs/fig1.png)
+
+## How to use?
+
+Hasan buraya how to bileşenleri gelecek, hangi library'lere gerek var, örnek kullanım, vs. 
