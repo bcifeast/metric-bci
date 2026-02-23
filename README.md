@@ -22,7 +22,7 @@ If you use this work, please cite:
 The algorithmic framework of the code can be seen as follows: the main theme is the application of metric learning approach (LMNN) on CSP feature space in EEG. 
 
 <p align="center">
-  <img src="figs/fig1.png" width="600">
+  <img src="figs/fig1.png" width="400">
 </p>
 
 ## How to use?
