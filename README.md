@@ -4,6 +4,17 @@ Application of metric learning on CSP feature space. Common Spatial Patterns (CS
 Experiments on four MI-EEG datasets show consistent test-accuracy improvements for most participants, with the largest gains observed on Dataset 1 (≈10% increase in mean α-band accuracy across AdaBoost, SVM, and LDA). The improvements are particularly pronounced for low-accuracy subjects (baseline < 60%), as confirmed by paired Wilcoxon signed-rank tests (p < 10⁻⁶).
 
 Overall, the CSP+LMNN pipeline provides a computationally efficient and interpretable solution, making it a practical candidate for real-world BCI applications.
+## 📚 Citation
+
+If you use this work, please cite:
+
+```bibtex
+@article{balci2026,
+  title={Improving Motor Imagery based BCI through Metric Learning},
+  author={Balci, T., Yetkin, E. Fatih},
+  journal={Biomedical Signal Processing and Control},
+  year={to appeared}
+}
 
 ![CSP+LMNN pipeline](figs/graphical_abstract.png)
 
