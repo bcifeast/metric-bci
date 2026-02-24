@@ -34,34 +34,43 @@ The framework follows a modular, pipeline-based object-oriented design philosoph
 ### 1. Installation
 
 First, clone the repository:
-```bash
+`bash
 git clone https://github.com/bcifeast/metric-bci.git
 cd metric-bci
-```
+`
 
-Create a virtual environment (recommended):
-```bash
-python -m venv venv
-source venv/bin/activate   # Linux / macOS
-venv\Scripts\activate      # Windows
-```
+We highly recommend using `conda` to manage dependencies and prevent package conflicts. Create and activate the virtual environment:
+`bash
+conda create -n metric_learning_env python=3.11 -y
+conda activate metric_learning_env
+`
 
-Install the required dependencies:
-```bash
+We recommend installing dependencies via `pip` inside the conda environment to ensure exact version matching as tested by the authors:
+`bash
 pip install -r requirements.txt
-```
+`
+
+*(Optional)* If you plan to use Jupyter Notebooks, register the environment as a kernel:
+`bash
+python -m ipykernel install --user --name metric_learning_env --display-name "Python (Metric Learning)"
+`
 
 ### 2. Required Libraries
 
-The framework relies on widely used scientific Python libraries. All dependencies are listed in `requirements.txt`:
+The framework relies on specific versions of scientific Python libraries to ensure reproducibility and avoid conflicts (e.g., avoiding compatibility issues with numpy>=2.0 and scikit-learn>=1.6). 
 
-* numpy, scipy
-* scikit-learn
-* metric-learn (LMNN backend)
-* mne
-* matplotlib, seaborn
-* pandas
-* jupyter
+The `requirements.txt` includes:
+* `numpy==1.26.4`
+* `scipy==1.11.4`
+* `scikit-learn==1.5.2`
+* `mne==1.7.1`
+* `metric-learn==0.7.0`
+* `pyriemann==0.6`
+* `joblib==1.4.2`
+* `openTSNE==1.0.2`
+* `pandas`, `matplotlib`, `seaborn`, `tqdm`, `ipykernel`
+
+*(Note: We recommend avoiding `moabb` in this environment due to known dependency conflicts).*
 
 ### 3. Quick Start Example
 
@@ -105,7 +114,25 @@ model = CSPLMNNPipeline(
 model.fit(X_train, y_train)
 ```
 
-### 5. Low-Level Module Usage (Advanced)
+### 5. Parallel Processing for Performance
+
+EEG feature extraction (CSP) and Metric Learning (LMNN) operations can be computationally expensive on large datasets. The pipeline is fully integrated with `joblib` to support parallel multi-core processing. 
+
+By default, the pipeline runs sequentially (`n_jobs=1`). You can significantly reduce training time by utilizing the `n_jobs` parameter to use multiple cores:
+
+```python
+from metric_bci.pipeline import CSPLMNNPipeline
+
+# n_jobs=1 (default): Sequential processing
+# n_jobs=-1: Utilizes all available CPU cores
+model = CSPLMNNPipeline(
+    m_filters=6,
+    k_neighbors=5,
+    n_jobs=-1  
+)
+model.fit(X_train, y_train)
+```
+### 6. Low-Level Module Usage (Advanced)
 
 For advanced users, CSP and LMNN modules can be used independently to experiment with custom pipelines or alternative classifiers:
 
@@ -122,7 +149,7 @@ lmnn = LMNN(k=3, out_dim=2)
 X_ml = lmnn.fit_transform(X_csp, y_train)
 ```
 
-### 6. Project Structure
+### 7. Project Structure
 
 To maintain reproducibility and extensibility, the repository is structured as follows:
 
@@ -138,6 +165,6 @@ metric_bci/
 └── utils/             # Helper functions
 ```
 
-### 7. Reproducibility & Extensibility
+### 8. Reproducibility & Extensibility
 
 This library is designed to be fully modular and extensible. New feature extraction methods, metric learning algorithms, or classifiers can be added by implementing independent modules that follow a unified `fit`/`transform`/`predict` API design.
