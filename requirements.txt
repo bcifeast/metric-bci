@@ -1,0 +1,13 @@
+numpy==1.26.4
+scipy==1.11.4
+scikit-learn==1.5.2
+mne==1.7.1
+pandas==2.2.2
+matplotlib==3.8.4
+seaborn==0.13.2
+openTSNE==1.0.2
+pyriemann==0.6
+metric-learn==0.7.0
+joblib==1.4.2
+tqdm==4.66.5
+ipykernel==6.29.5
