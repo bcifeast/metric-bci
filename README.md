@@ -61,7 +61,7 @@ Install dependencies with **pip** inside the activated environment (exact versio
 pip install -r requirements.txt
 ```
 
-**Alternative to conda (using Python’s venv:** If you prefer a virtualenv instead of conda:
+**Alternative to conda (using Python’s venv):** If you prefer a virtualenv instead of conda:
 
 ```bash
 python3.11 -m venv .venv
@@ -131,7 +131,10 @@ The built-in `load_dataset(...)` returns `(X_train, y_train, X_test, y_test)` in
 
 Save the code below into a file (e.g. `main.py`) in the repository root and run: `python main.py`, or run the same code in a Jupyter notebook. Do not paste the block into the terminal as-is.
 
+**Note:** Quick start uses a simple `fit` / `score` flow (no cross-validation). For CV-based evaluation with training accuracy and full metrics, see Section 5.
+
 ```python
+import time
 from metric_bci.pipeline import CSPLMNNPipeline
 from metric_bci.datasets import load_dataset
 from metric_bci.config import FREQUENCY_BANDS
@@ -155,12 +158,26 @@ model = CSPLMNNPipeline(
     classifier="svm",
 )
 
+t0 = time.perf_counter()
 model.fit(X_train, y_train)
-accuracy = model.score(X_test, y_test)
-print(f"Test accuracy: {accuracy * 100:.2f}%")
+train_cpu_time = time.perf_counter() - t0
+
+t0 = time.perf_counter()
+test_acc = model.score(X_test, y_test)
+test_cpu_time = time.perf_counter() - t0
+
+print(f"Test accuracy: {test_acc * 100:.2f}%")
+print(f"Train CPU time: {train_cpu_time:.2f} s  |  Test CPU time: {test_cpu_time:.2f} s")
 ```
 
-If this runs without errors and prints a test accuracy, your setup is correct. For **datasets 2 and 3**, you must download the data and place it under the directory given by `metric_bci.config.DATA_DIR` (default: `Datasets/` in the repo root); see the table in Section 3 and the docstring of `load_dataset` in `metric_bci.datasets` for the expected folder layout.
+**Example output:**
+
+```
+Test accuracy: 66.67%
+Train CPU time: 1.19 s  |  Test CPU time: 0.00 s
+```
+
+If this runs without errors and prints a test accuracy, your setup is correct. The CPU times show that training (fit) is the costly step, while test (predict) is fast. For **datasets 2 and 3**, you must download the data and place it under the directory given by `metric_bci.config.DATA_DIR` (default: `Datasets/` in the repo root); see the table in Section 3 and the docstring of `load_dataset` in `metric_bci.datasets` for the expected folder layout.
 
 ### 5. Running the full experiment grid
 
@@ -179,8 +196,21 @@ saved_files = run_full_experiment(
     k_lmnn_range=(1, 5),
     output_dir=".",
 )
-# Output: CSV files, e.g. csp_lmnn_results_alpha_dataset1.csv
+print("Saved files:", saved_files)
 ```
+
+**Example output:**
+
+```
+[dataset1] band=alpha freq_range=(8, 12)
+  subject 1 (train 60, test 30)
+  Example: acc_train=55.0%, acc_test=66.7%, train_cpu_time=10.8s, test_cpu_time=0.002s
+  subject 2 (train 60, test 30)
+  Saved ./csp_lmnn_results_alpha_dataset1.csv (16 rows)
+Saved files: ['./csp_lmnn_results_alpha_dataset1.csv']
+```
+
+The `Example` line shows training accuracy (CV mean), test accuracy, and CPU times for the first result. Training is slow because each CV fold refits CSP and LMNN (correct methodology); test time is short because it only runs predict on the held-out test set.
 
 Omit `subjects` and `bands` to run over all subjects and all bands defined in `config.FREQUENCY_BANDS`. Use `max_subjects` in `get_subject_list` for shorter runs.
 
@@ -236,6 +266,12 @@ CSP is provided by **MNE** (`mne.decoding.CSP`), and LMNN by **metric-learn**; b
 ### 9. Reproducibility and extensibility
 
 The same experimental protocol (datasets, bands, subjects, CSP/LMNN parameters, classifiers) can be rerun via `run_full_experiment` and the provided notebooks. Configuration is centralized in `config.py`; new bands or data paths can be added there. The pipeline accepts any classifier compatible with scikit-learn’s estimator interface, and the dataset loader in `datasets.py` can be extended for additional datasets that follow the same `(X_train, y_train, X_test, y_test)` format and shapes described in Section 3.
+
+---
+
+## About
+
+Application of metric learning on CSP feature space for motor-imagery BCI.
 
 ---
 
