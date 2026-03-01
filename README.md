@@ -13,7 +13,7 @@ If you use this work, please cite:
   title={Improving Motor Imagery based BCI through Metric Learning},
   author={Balli, T., Yetkin, E. Fatih},
   journal={Biomedical Signal Processing and Control},
-  year={to appeared}
+  year={to be appeared}
 }
 ```
 
