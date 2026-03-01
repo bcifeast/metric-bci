@@ -27,8 +27,11 @@ The algorithmic framework of the code can be seen as follows: the main theme is 
 
 ## 🔧 How to use?
 
-This repository provides a modular Python package for applying metric learning (LMNN) on CSP-based EEG features for motor imagery (MI) BCI. It currently supports **three** motor-imagery datasets through a unified API. The sections below are written so that you can **clone the repo, follow the steps in order, and run the code from scratch** on a new machine.
+This repository provides a modular Python package for applying metric learning (LMNN) on CSP-based EEG features for motor imagery (MI) BCI. It currently supports **three** motor-imagery datasets through a unified API. The sections below are written so that you can **clone the repo, follow the steps in order, and run the code from scratch** on a new machine. 
 
+⚠️ **Note:** This library is currently under active development. 
+> Features may change, and bugs may be present. 
+> Please use it at your own risk.
 **Checklist for first run:** (1) Clone repo → (2) Create environment (conda or venv) → (3) `pip install -r requirements.txt` → (4) Run the Quick start code in Section 4 from the repo root. Dataset1 is auto-downloaded; if that runs without errors, the setup is correct.
 
 ---
