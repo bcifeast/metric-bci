@@ -273,8 +273,4 @@ The same experimental protocol (datasets, bands, subjects, CSP/LMNN parameters, 
 
 Application of metric learning on CSP feature space for motor-imagery BCI.
 
----
 
-## About
-
-Application of metric learning on CSP feature space for motor-imagery BCI.
