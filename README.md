@@ -9,11 +9,17 @@ Overall, the CSP+LMNN pipeline provides a computationally efficient and interpre
 If you use this work, please cite:
 
 ```bibtex
-@article{balli2026,
-  title={Improving Motor Imagery based BCI through Metric Learning},
-  author={Balli, T., Yetkin, E. Fatih},
-  journal={Biomedical Signal Processing and Control},
-  year={to be appeared}
+@article{BALLI2026110460,
+title = {Improving motor imagery based BCI through metric learning},
+journal = {Biomedical Signal Processing and Control},
+volume = {122},
+pages = {110460},
+year = {2026},
+issn = {1746-8094},
+doi = {https://doi.org/10.1016/j.bspc.2026.110460},
+url = {https://www.sciencedirect.com/science/article/pii/S1746809426010141},
+author = {Tuğçe Ballı and E. Fatih Yetkin},
+keywords = {BCI, CSP, EEG, Metric learning, Motor imagery classification}
 }
 ```
 
